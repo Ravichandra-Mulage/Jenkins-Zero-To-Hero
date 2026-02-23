@@ -1,10 +1,12 @@
 
 FROM maven:3.9.6-eclipse-temurin-17
 
-RUN apt-get update && \
-    apt-get install -y docker.io git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Simply the artifact path
+ARG artifact=target/spring-boot-web.jar
 
-# IMPORTANT: keep container alive
-CMD ["cat"]
+WORKDIR /opt/app
+
+COPY ${artifact} app.jar
+
+# This should not be changed
+ENTRYPOINT ["java","-jar","app.jar"]
