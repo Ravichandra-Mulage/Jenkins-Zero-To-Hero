@@ -1,7 +1,10 @@
 
-FROM eclipse-temurin:17-jre-alpine
+FROM maven:3.9.6-eclipse-temurin-17
 
-ARG artifact=target/spring-boot-web.jar
-WORKDIR /opt/app
-COPY ${artifact} app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+RUN apt-get update && \
+    apt-get install -y docker.io git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# IMPORTANT: keep container alive
+CMD ["cat"]
