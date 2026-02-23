@@ -1,12 +1,11 @@
 
-FROM eclipse-temurin:17-jre-alpine
+FROM maven:3.9.6-eclipse-temurin-17
 
-# Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
+# Install required tools
+RUN apt-get update && \
+    apt-get install -y docker.io git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-WORKDIR /opt/app
-
-COPY ${artifact} app.jar
-
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+# Keep the container alive for Jenkins
+CMD ["sleep", "infinity"]
