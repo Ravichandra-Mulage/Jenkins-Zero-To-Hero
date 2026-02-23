@@ -1,5 +1,5 @@
 
-FROM maven:3.9.6-eclipse-temurin-17
+FROM eclipse-temurin:17-jre-alpine
 
 # Simply the artifact path
 ARG artifact=target/spring-boot-web.jar
